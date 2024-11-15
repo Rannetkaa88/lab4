@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 using System.Linq;
+using System;
 
 public class CombinedPrograms
 {
@@ -57,6 +57,7 @@ public class CombinedPrograms
         }
         Console.WriteLine();
     }
+
     // Задание 3
     public static HashSet<string> GetDiscosVisitedByAll(List<HashSet<string>> studentDiscos)
     {
@@ -181,8 +182,10 @@ public class CombinedPrograms
             applicants.Add(applicant);
         }
         XmlSerializer serializer = new XmlSerializer(typeof(List<Applicant>));
-        FileStream fileStream = new FileStream(filePath, FileMode.Create);
-        serializer.Serialize(fileStream, applicants);
+        using (FileStream fileStream = new FileStream(filePath, FileMode.Create))
+        {
+            serializer.Serialize(fileStream, applicants);
+        }
     }
 
     public static List<Applicant> ReadApplicantData(string filePath)
@@ -191,8 +194,10 @@ public class CombinedPrograms
         XmlSerializer serializer = new XmlSerializer(typeof(List<Applicant>));
         try
         {
-            FileStream fileStream = new FileStream(filePath, FileMode.Open);
+            using (FileStream fileStream = new FileStream(filePath, FileMode.Open))
+            {
                 applicants = (List<Applicant>)serializer.Deserialize(fileStream);
+            }
         }
         catch (Exception ex)
         {
