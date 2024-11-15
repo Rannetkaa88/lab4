@@ -28,8 +28,8 @@ public class CombinedPrograms
         Console.WriteLine();
     }
 
-// Задание 2
-public static void InsertAround<T>(LinkedList<T> list, T elementE, T elementF)
+    // Задание 2
+    public static void InsertAround<T>(LinkedList<T> list, T elementE, T elementF)
     {
         if (list == null) return;
         LinkedListNode<T> node = list.Find(elementE);
@@ -137,7 +137,7 @@ public static void InsertAround<T>(LinkedList<T> list, T elementE, T elementF)
 
     public static void TextProcessorDemo()
     {
-        string filePath = "input.txt"; 
+        string filePath = "input.txt";
         string text = "";
         try
         {
@@ -181,10 +181,8 @@ public static void InsertAround<T>(LinkedList<T> list, T elementE, T elementF)
             applicants.Add(applicant);
         }
         XmlSerializer serializer = new XmlSerializer(typeof(List<Applicant>));
-        using (FileStream fileStream = new FileStream(filePath, FileMode.Create))
-        {
-            serializer.Serialize(fileStream, applicants);
-        }
+        FileStream fileStream = new FileStream(filePath, FileMode.Create);
+        serializer.Serialize(fileStream, applicants);
     }
 
     public static List<Applicant> ReadApplicantData(string filePath)
@@ -193,10 +191,8 @@ public static void InsertAround<T>(LinkedList<T> list, T elementE, T elementF)
         XmlSerializer serializer = new XmlSerializer(typeof(List<Applicant>));
         try
         {
-            using (FileStream fileStream = new FileStream(filePath, FileMode.Open))
-            {
+            FileStream fileStream = new FileStream(filePath, FileMode.Open);
                 applicants = (List<Applicant>)serializer.Deserialize(fileStream);
-            }
         }
         catch (Exception ex)
         {
