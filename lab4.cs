@@ -9,14 +9,17 @@ public class CombinedPrograms
     // Задание 1
     public static void ReverseList()
     {
-        List<int> list = new List<int> { 1, 2, 3, 4, 5 };
+        List<string> list = new List<string> { "1", "2", "3", "4", "5" };
+
         Console.WriteLine("Исходный список:");
         foreach (var item in list)
         {
             Console.Write(item + " ");
         }
         Console.WriteLine();
+
         list.Reverse();
+
         Console.WriteLine("Перевёрнутый список:");
         foreach (var item in list)
         {
@@ -25,8 +28,8 @@ public class CombinedPrograms
         Console.WriteLine();
     }
 
-    // Задание 2
-    public static void InsertAround<T>(LinkedList<T> list, T elementE, T elementF)
+// Задание 2
+public static void InsertAround<T>(LinkedList<T> list, T elementE, T elementF)
     {
         if (list == null) return;
         LinkedListNode<T> node = list.Find(elementE);
@@ -37,15 +40,15 @@ public class CombinedPrograms
 
     public static void LinkedListInsertDemo()
     {
-        LinkedList<int> list = new LinkedList<int>(new[] { 1, 2, 3, 4, 5 });
+        LinkedList<string> list = new LinkedList<string>(new[] { "1", "2", "3", "4", "5" });
         Console.WriteLine("Исходный список:");
         foreach (var item in list)
         {
             Console.Write(item + " ");
         }
         Console.WriteLine();
-        int elementE = 3;
-        int elementF = 10;
+        string elementE = "3";
+        string elementF = "10";
         InsertAround(list, elementE, elementF);
         Console.WriteLine($"Список после вставки {elementF} вокруг {elementE}:");
         foreach (var item in list)
@@ -54,7 +57,6 @@ public class CombinedPrograms
         }
         Console.WriteLine();
     }
-
     // Задание 3
     public static HashSet<string> GetDiscosVisitedByAll(List<HashSet<string>> studentDiscos)
     {
