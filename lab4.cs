@@ -210,17 +210,33 @@ public class CombinedPrograms
     {
         string filePath = "applicants.xml";
         int numApplicants = 10;
+
+        // Генерация данных и запись в XML-файл
         GenerateApplicantData(filePath, numApplicants);
+
+        // Чтение данных из XML-файла
         List<Applicant> applicants = ReadApplicantData(filePath);
+
         if (applicants != null)
         {
+            // Отбор абитуриентов, допущенных к экзаменам
             var admittedApplicants = applicants
                 .Where(a => a.Score1 >= 30 && a.Score2 >= 30 && a.Score3 >= 30 && a.Score1 + a.Score2 + a.Score3 >= 140)
                 .OrderBy(a => a.LastName);
-            Console.WriteLine("Абитуриенты, допущенные к экзаменам:");
+
+            Console.WriteLine("Абитуриенты, допущенные к экзаменам (с проверкой длины имени и фамилии):");
+
             foreach (var applicant in admittedApplicants)
             {
-                Console.WriteLine($"{applicant.LastName} {applicant.FirstName}");
+                // Проверка длины фамилии и имени
+                if (applicant.LastName.Length <= 20 && applicant.FirstName.Length <= 15)
+                {
+                    Console.WriteLine($"{applicant.LastName} {applicant.FirstName}");
+                }
+                else
+                {
+                    Console.WriteLine($"{applicant.LastName} {applicant.FirstName} – Пропущен: несоответствие длины имени или фамилии");
+                }
             }
         }
     }
